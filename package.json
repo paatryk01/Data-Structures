@@ -4,12 +4,18 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "test"
+    "test": "mocha",
+    "ci": "npm run lint && npm run test -- --coverage"
   },
   "repository": {
     "type": "git",
     "url": "Data Structures"
   },
   "author": "Patryk Antosz",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.1.2"
+  }
 }
