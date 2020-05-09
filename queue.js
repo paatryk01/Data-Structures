@@ -1,5 +1,5 @@
 "use strict"
-class Queue{
+module.exports = class Queue{
     constructor(){
         this.items = [];
     }
@@ -18,12 +18,13 @@ class Queue{
         if(!this.isEmpty()){
             return this.items[0];
         }
+        return 'Queue is empty';
     }
     printQueue(){
         if(!this.isEmpty()){
-            return 'Queue is empty';
+            return this.items;
         }
-        return this.items;
+        return 'Queue is empty';
     }
     clear(){
         this.items = [];
