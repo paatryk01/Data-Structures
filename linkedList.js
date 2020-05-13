@@ -1,11 +1,12 @@
 'use strict'
-class Node(){
-    constructor(value, next = null){
-        this.value = value;
-        this.next = next;
-    }
-}
-class LinkedList{
+// module.exports = class Node{
+//     constructor(value, next = null){
+//         this.value = value;
+//         this.next = next;
+//     }
+// }
+const Node = require('./linkedListNode')
+module.exports = class LinkedList{
     constructor(){
         this.length = 0; 
         this.tail = null; // Last node of the linked list.
@@ -14,40 +15,33 @@ class LinkedList{
     isEmpty(){
         return this.length === 0;
     }
-    printList(){
-        const nodes = [];
-        let current = this.head;
-        while(current){ // If current is exisiting, we are adding this value to array.
-            nodes.push(current);
-            current = current.next;
-        }
-        return nodes.join(' -> ') // We are connecting every node using arrows.
-    }
-    push(value){ // We are adding new value at the end of the list.
+    addToTail(value){ // We are adding new value at the end of the list.
         const node = new Node(value);
         if(this.head === null){
             this.head = node;
             this.tail = node;
-            this.lenght++;
+            this.length++;
             return node;
         }
-        this.tail.next = node;
-        this.tail = node;
+        else {
+            this.tail.next = node;
+            this.tail = node;
+        }
         this.length++;
     }
-    pop(){ // We are removing last element from the list.
+    removeTail(){ // We are removing last element from the list.
+        const nodeToRemove = this.tail; // We want to remove last element - tail.
+        let currentNode = this.head; // We are iterating all elements starting from first element - head.
+        let secondToLastNode;
         if(this.isEmpty()){
             return null;
         }
-        const nodeToRemove = this.tail; // We want to remove last element - tail.
         if(this.length === 1){ // If list has only 1 element, we are removing the only one element.
             this.head = null;
             this.tail = null;
             this.length--;
             return nodeToRemove;
         }
-        let currentNode = this.head; // We are iterating all elements starting from first element - head.
-        let secondToLasNode;
         while(currentNode){ // If currentNode exists, we are checking if his next element is the last one.
             if(currentNode.next === this.tail){ // If it's true, we are saving second last node as a current node.
                 secondToLastNode = currentNode;
@@ -59,16 +53,16 @@ class LinkedList{
         this.length--;
         return nodeToRemove;
     }
-    shift(){ // We are removing first element, head.
+    removeHead(){ // We are removing first element, head.
         if(this.isEmpty()){
             return null;
         }
         let currentHead = this.head; // Current head is the first element.
-        this.head = this.head.next; // New first element is the next element, so we are missing old this.head.
+        this.head = currentHead.next; // New first element is the next element, so we are missing old this.head.
         this.length--;
         return currentHead;
     }
-    unshift(value){ // We are creating a new head.
+    addToHead(value){ // We are creating a new head.
         const node = new Node(value);
         if(this.isEmpty()){ // If the list is empty, value is a head.
             this.head = node;
@@ -83,7 +77,7 @@ class LinkedList{
         if(index < 0 || index > this.length || this.isEmpty()){
             return null;
         }
-        if(index === 0){
+        else if(index === 0){
             return this.head;
         }
         let current = this.head;
@@ -107,9 +101,8 @@ class LinkedList{
         let currentNode = this.head;
         let previousNode;
         let currentIndex = 0;
-        
-        if(index > length){
-            return false;
+        if(index > this.length){
+            return null;
         }
 
         if(index === 0){
@@ -125,13 +118,13 @@ class LinkedList{
             node.next = currentNode;
             previousNode.next = node;
         }
-        length++;
+        this.length++;
     }
     removeAt(index){
         let currentNode = this.head;
         let previousNode;
         let currentIndex = 0;
-        if(index < 0 || index >= length){
+        if(index < 0 || index >= this.length){
             return null
         }
         if(index === 0){
@@ -145,7 +138,7 @@ class LinkedList{
             }
             previousNode.next = currentNode.next;
         }
-        length--;
+        this.length--;
         return currentNode.value;
     }
     remove(value){
@@ -162,5 +155,14 @@ class LinkedList{
             previousNode.next = currentNode.next;
         }
         this.length--;
-    } 
+    }
+    printList() {
+        const nodes = [];
+        let current = this.head;
+        while (current) { // If current is exisiting, we are adding this value to array.
+            nodes.push(current);
+            current = current.next;
+        }
+        return nodes.join(' -> ') // We are connecting every node using arrows.
+    }
 }
