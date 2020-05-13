@@ -160,9 +160,9 @@ module.exports = class LinkedList{
         const nodes = [];
         let current = this.head;
         while (current) { // If current is exisiting, we are adding this value to array.
-            nodes.push(current);
+            nodes.push(current.value);
             current = current.next;
         }
-        return nodes.join(' -> ') // We are connecting every node using arrows.
+        return nodes.join(' -> '); // We are connecting every node using arrows.
     }
 }

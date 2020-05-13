@@ -93,14 +93,12 @@ describe('LinkedList', () => {
         assert.equal(list.get(1).value, 12);
         assert.equal(list.length, 2);
     });
-    // it('should print list', () => {
-    //     const list = new LinkedList();
-    //     list.printList();
-    //     assert.equal(JSON.stringify(list.nodes), null);
-    //     list.addToHead(412);
-    //     list.addToTail(41);
-    //     list.addToTail(12);
-    //     list.printList();
-    //     assert.equal(JSON.stringify(list.nodes), '412 -> 41 -> 12');
-    // });
+    it('should print list', () => {
+        const list = new LinkedList();
+        list.addToHead(412);
+        list.addToTail(41);
+        list.addToTail(12);
+        list.printList();
+        assert.equal(list.printList(), '412 -> 41 -> 12');
+    });
 });
