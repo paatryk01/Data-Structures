@@ -1,58 +1,52 @@
 'use strict'
 const Node = require('./nodeBST');
 module.exports = class BST{
-   constructor(root){
-       this.root = root;
+   constructor(){
+       this.root = null;
     };
-    insert(key){
-        const newNode = new Node(key);
-        if(this.root === null){
+    insert(data){
+        const newNode = new Node(data);
+        if(!this.root){
             this.root = newNode;
         }
         else{
             this.insertHelper(this.root, newNode);
         }
     };
-    //helper
     insertHelper(node, newNode){
-        if(newNode < node){
-            if(node.left === null){
+        if(newNode.data < node.data){
+            if(!node.left){
                 node.left = newNode;
             }
             else {
-                insertHelper(node.left, newNode);
+                this.insertHelper(node.left, newNode);
             }
         }
         else {
-            if(node.right === null){
+            if(!node.right){
                 node.right = newNode;
             }
             else {
-                insertHelper(node.right, newNode);
+                this.insertHelper(node.right, newNode);
             }
         }
     };
-    remove(key){
+    remove(data){
         if(!this.root){
-            return `nothing to delete, tree is empty`;
+            return 'tree is empty';
         }
-        else {
-            return removeHelper(this.node, key);
-        }
+        this.removeHelper(this.root, data);
     };
-    removeHelper(node, key){
-        if(this.root === null){
-            return null;
-        }
-        else if(key < node.key){
-            node.left = this.removeHelper(node.left, key);
+    removeHelper(node, rmNode){
+        if(rmNode < node.data){
+            node.left = this.removeHelper(node.left, rmNode);
             return node;
         }
-        else if(key > node.key){
-            node.right = this.removeHelper(node.right, key);
+        else if(rmNode > node.data){
+            node.right = this.removeHelper(node.right, rmNode);
             return node;
         }
-        else {
+        else{
             if(node.left === null && node.right === null){
                 node = null;
                 return node;
@@ -65,9 +59,8 @@ module.exports = class BST{
                 node = node.left;
                 return node;
             }
-            let minRight = this.findMinFrom(node.right);
-            node.key = minRight.key;
-            node.right = this.removeHelper(node.right, minRight.key);
+            let aux = this.findMinFrom(node.right)
+            node.data = aux.data;
             return node;
         }
     };
@@ -75,11 +68,77 @@ module.exports = class BST{
         if(node.left === null){
             return node;
         }
-        else {
-            return this.findMinFrom(node.left);
+        return this.findMinFrom(node.left);
+    };
+    search(searchedNode){
+        if(!this.root){
+            return 'tree is empty';
+        }
+        return this.searchHelper(this.root, searchedNode);
+    };
+    searchHelper(node, searchedNode){
+        if(node === null){
+            return false;
+        }
+        else if(node.data < searchedNode){
+            return this.searchHelper(node.right, searchedNode);
+        }
+        else if(node.data > searchedNode){
+            return this.searchHelper(node.left, searchedNode);
+        }
+        else{
+            return true;
         }
     };
-    printNode(node){
-        return node.key;
+    findMin(){
+        if(this.root){
+            let node = this.root;
+            while(node && node.left !== null){
+                node = node.left;
+            }
+            return node.data;
+        }
     };
+    findMax(){
+        if(this.root){
+            let node = this.root;
+            while(node && node.right !== null){
+                node = node.right;
+            }
+            return node.data;
+        }
+    };
+    inOrder(){
+        if(this.root === null) return null;
+        const result = [];
+        const inOrderHelper = (node) => {
+            if (node.left) inOrderHelper(node.left);
+            result.push(node.data);
+            if (node.right) inOrderHelper(node.right);
+        }
+        inOrderHelper(this.root);
+        return result.toString();
+    }
+    preOrder(){
+        if(this.root === null) return null;
+        const result = [];
+        const preOrderHelper = (node) => {
+            result.push(node.data);
+            if(node.left) preOrderHelper(node.left);
+            if(node.right) preOrderHelper(node.right);
+        }
+        preOrderHelper(this.root);
+        return result.toString();
+    }
+    postOrder(){
+        if(this.root === null) return null;
+        const result = [];
+        const postOrderHelper = (node) => {
+            if(node.left) postOrderHelper(node.left);
+            if(node.right) postOrderHelper(node.right);
+            result.push(node.data);
+        }
+        postOrderHelper(this.root);
+        return result.toString();
+    }
 }

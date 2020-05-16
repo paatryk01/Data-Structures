@@ -1,7 +1,7 @@
 'use strict'
 module.exports = class Node {
-    constuctor(key, data) {
-        this.key = key;
+    constructor(data) {
+        this.data = data;
         this.left = null;
         this.right = null;
     }

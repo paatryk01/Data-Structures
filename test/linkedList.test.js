@@ -1,6 +1,6 @@
 const assert = require('chai').assert;
 const LinkedList = require('../linkedList');
-const Node = require('../LinkedListNode');
+// const Node = require('../LinkedListNode');
 
 describe('LinkedList', () => {
     it('should return empty list', () => {
