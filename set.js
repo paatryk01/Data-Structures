@@ -50,7 +50,7 @@ module.exports = class Set{
                 toReturn.insert(elem);
             }
         }
-        return toReturn;
+        return toReturn.data;
     }
     differences(otherSet){
         const toReturn = new Set();
@@ -59,6 +59,6 @@ module.exports = class Set{
                 toReturn.insert(elem);
             }
         }
-        return toReturn;
+        return toReturn.data;
     }
 }

@@ -67,13 +67,6 @@ describe('BST', () => {
         tree.remove(50);
         assert.equal(tree.findMax(), 29);
     });
-    // it('should print a value of node', () => {
-    //     const tree = new BST();
-    //     tree.insert(11);
-    //     tree.insert(4);
-    //     assert.equal(tree.printNode(4), '4');
-    //     assert.equal(tree.printNode(11), '11');
-    // });
     it('should return nodes in order', () => {
         const tree = new BST();
         assert.isNull(tree.inOrder());

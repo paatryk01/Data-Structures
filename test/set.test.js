@@ -24,16 +24,39 @@ describe('Set', () => {
         assert.equal(set.has('otherValue'), false);
         assert.equal(set.getLength(), 2);
     });
-    // it('should return new set with values which are in to compared sets', () => {
-    //     const set = new Set();
-    //     const otherSet = new Set();
-    //     set.insert(12);
-    //     set.insert(15);
-    //     set.insert(4);
-    //     otherSet.insert(4);
-    //     otherSet.insert(15);
-    //     otherSet.insert(55);
-    //     set.intersect(otherSet);
-    //     assert.equal(this.toReturn.length, 4);
-    // });
+    it('should return new set with values which are in to compared sets', () => {
+        const set = new Set();
+        const otherSet = new Set();
+        set.insert(12);
+        set.insert(15);
+        set.insert(4);
+        otherSet.insert(4);
+        otherSet.insert(15);
+        otherSet.insert(55);
+        assert.equal(set.intersect(otherSet), '15,4');
+    });
+    it('should return new set with values from 2 sets', () => {
+        const set = new Set();
+        const otherSet = new Set();
+        set.insert(12);
+        set.insert(15);
+        set.insert(4);
+        otherSet.insert(4);
+        otherSet.insert(15);
+        otherSet.insert(55);
+        assert.equal(set.union(otherSet), '12,15,4,55');
+        set.insert(55);
+        assert.equal(set.union(otherSet), '12,15,4,55');
+    });
+    it('should return new set with values from 2 sets', () => {
+        const set = new Set();
+        const otherSet = new Set();
+        set.insert(12);
+        set.insert(15);
+        set.insert(4);
+        otherSet.insert(4);
+        otherSet.insert(15);
+        otherSet.insert(55);
+        assert.equal(set.differences(otherSet), '12');
+    });
 });

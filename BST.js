@@ -118,7 +118,7 @@ module.exports = class BST{
         }
         inOrderHelper(this.root);
         return result.toString();
-    }
+    };
     preOrder(){
         if(this.root === null) return null;
         const result = [];
@@ -129,7 +129,7 @@ module.exports = class BST{
         }
         preOrderHelper(this.root);
         return result.toString();
-    }
+    };
     postOrder(){
         if(this.root === null) return null;
         const result = [];
