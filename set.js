@@ -4,6 +4,7 @@ module.exports = class Set{
         this.data = [];
     }
     has(value){
+        // this.data.indexOf(value) > -1 ? true : false;
         if(this.data.indexOf(value) > -1) {
             return true;
         } 
@@ -18,18 +19,13 @@ module.exports = class Set{
         return this.data;
     }
     insert(value){
-        if(this.has(value)){
-            return false;
-        }
-        else{
-            this.data.push(value);
-        }
+        this.has(value) ? false : this.data.push(value);
     }
     remove(value){
         const index = this.data.indexOf(value);
         if(index > -1){
             return this.data.splice(index, 1);
-        }
+        } 
     }
     union(otherSet){
         const toReturn = new Set();
