@@ -4,13 +4,8 @@ module.exports = class Set{
         this.data = [];
     }
     has(value){
-        // this.data.indexOf(value) > -1 ? true : false;
-        if(this.data.indexOf(value) > -1) {
-            return true;
-        } 
-        else{
-            return false;
-        }
+        const hasData = this.data.indexOf(value) > -1 ? true : false;
+        return hasData;
     }
     getLength(){
         return this.data.length;
